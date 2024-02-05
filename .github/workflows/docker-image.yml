@@ -32,7 +32,7 @@ jobs:
         id: get-version
 
       - name: Build the Docker Image
-        run: docker build -t docker.pkg.github.com/${{ github.repository }}/deepin-api:${{ steps.get-version.outputs.version }} .
+        run: docker build -t docker.pkg.github.com/${{ github.repository }}/test:${{ steps.get-version.outputs.version }} .
 
       - name: Push the Docker Image
-        run: docker push docker.pkg.github.com/${{ github.repository }}/deepin-api:${{ steps.get-version.outputs.version }}
+        run: docker push docker.pkg.github.com/${{ github.repository }}/test:${{ steps.get-version.outputs.version }}
