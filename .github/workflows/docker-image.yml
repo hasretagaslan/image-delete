@@ -39,3 +39,14 @@ jobs:
 
       - name: Push the Docker Image
         run: docker push docker.pkg.github.com/${{ github.repository }}/test:${{ steps.get-version.outputs.version }}
+      
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get-version.outputs.version }}
+          release_name: Release ${{ steps.get-version.outputs.version }}
+          draft: false
+          prerelease: false
