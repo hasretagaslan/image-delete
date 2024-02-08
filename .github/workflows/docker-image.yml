@@ -67,7 +67,5 @@ jobs:
       - uses: actions/delete-package-versions@v4
         with: 
           package-name: 'test'
-          min-versions-to-keep: 3
-          ignore-versions: ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-RC[0-9]+)?$
-          num-old-versions-to-delete: 1
-
+          min-versions-to-keep: 10
+          delete-only-pre-release-versions: "true"
