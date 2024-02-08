@@ -65,11 +65,8 @@ jobs:
           prerelease: false
 
       - uses: actions/delete-package-versions@v4
-        with:
-          owner: github
-          package-name: test
+        with: 
+          package-name: 'test-package'
+          package-type: 'npm'
           min-versions-to-keep: 3
-          ignore-versions: '^(0|[1-9]\\d*)\\.0\\.0(-RC[0-9]+)?$'
-          num-old-versions-to-delete: 1
-          delete-only-pre-release-versions: true
-         
+          ignore-versions: '^(0|[1-9]\\d*)\\.0\\.0$'
