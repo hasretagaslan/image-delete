@@ -69,4 +69,5 @@ jobs:
           package-name: 'test'
           min-versions-to-keep: 3
           ignore-versions: ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-RC[0-9]+)?$
+          num-old-versions-to-delete: 1
 
