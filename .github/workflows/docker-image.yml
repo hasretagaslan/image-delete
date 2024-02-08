@@ -72,4 +72,5 @@ jobs:
           ignore-versions: '^(0|[1-9]\\d*)\\.0\\.0(-RC[0-9]+)?$'
           num-old-versions-to-delete: 1
           delete-only-pre-release-versions: true
-          token: ${{ secrets.TOKEN}}
+          token: ${{ secrets.GITHUB_PAT }}
+
