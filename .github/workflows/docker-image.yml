@@ -22,11 +22,11 @@ jobs:
 
       - name: Update Version
         run: |
-          VERSION=$(cat version.txt)
+          VERSION=$(cat version_1.txt)
           
           NEW_VERSION=$(echo $VERSION | awk -F-RC '{printf("%s-RC%d", $1,$2+1)}')
           
-          echo $NEW_VERSION > version.txt
+          echo $NEW_VERSION > version_1.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
