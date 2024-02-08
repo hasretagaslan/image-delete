@@ -67,8 +67,8 @@ jobs:
       - uses: actions/delete-package-versions@v4
         with:
           package-name: 'test'
+          package-type: 'container'
           min-versions-to-keep: 10
           delete-only-pre-release-versions: true
           token: ${{ secrets.TOKEN }}
-          num-old-versions-to-delete: 1
           delete-only-untagged-versions: false
