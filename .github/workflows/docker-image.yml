@@ -22,7 +22,7 @@ jobs:
 
       - name: Update Version
         run: |
-          VERSION=$(cat version.txt)
+          VERSION=$(cat version_1.txt)
           MAJOR_MINOR=$(echo $VERSION | awk -F'-' '{print $1}')
           RC_VERSION=$(echo $VERSION | awk -F'-' '{print $2}')
           
@@ -34,7 +34,7 @@ jobs:
             NEW_VERSION="${MAJOR_MINOR}-RC${NEXT_RC_NUMBER}"
           fi
           
-          echo $NEW_VERSION > version.txt
+          echo $NEW_VERSION > version1.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
