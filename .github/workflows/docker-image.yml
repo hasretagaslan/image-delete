@@ -77,5 +77,6 @@ jobs:
       - uses: actions/delete-package-versions@v4
         with:
           package-name: 'image-delete/test'
+          package-type: 'container'
           min-versions-to-keep: 5
           ignore-versions: '^.*-RC[0-9]+$'
