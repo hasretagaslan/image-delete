@@ -63,4 +63,10 @@ jobs:
           release_name: Release ${{ steps.get-version.outputs.version }}
           draft: false
           prerelease: false
-      
+
+      - uses: actions/delete-package-versions@v4
+        with:
+          owner: 'github'
+          package-name: 'test'
+          min-versions-to-keep: 3
+          ignore-versions: '^(0|[1-9]\\d*)\\.0\\.0(-RC[0-9]+)?$'
