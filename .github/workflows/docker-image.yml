@@ -63,12 +63,4 @@ jobs:
           release_name: Release ${{ steps.get-version.outputs.version }}
           draft: false
           prerelease: false
-      - name: Commit Changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config --local user.email "hasretagaslan@gmail.com"
-          git config --local user.name "hasretagaslan"
-
-          git commit -a -m "Updated version number [skip ci]"
-          git push
+      
