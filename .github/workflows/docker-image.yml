@@ -23,20 +23,18 @@ jobs:
       - name: Update Version
         run: |
           VERSION=$(cat version.txt)
-          MAJOR_MINOR=$(echo $VERSION | cut -d '.' -f1,2)
-          LAST_PART=$(echo $VERSION | cut -d '-' -f2)
-          
-          if [ -z "$LAST_PART" ]; then
-            NEW_VERSION="$MAJOR_MINOR-RC01"
+          MAJOR_MINOR=$(echo $VERSION | awk -F'[-.]' '{print $1"."$2}')
+          RC_VERSION=$(echo $VERSION | awk -F'[-.]' '{print $3}')
+          if [ -z "$RC_VERSION" ]; then
+            NEW_VERSION="${MAJOR_MINOR}-RC01"
           else
-            RC_VERSION=$(echo $LAST_PART | awk -F 'RC' '{print $2}')
-            NEXT_RC_VERSION=$((RC_VERSION + 1))
-            NEW_VERSION="${MAJOR_MINOR}-RC${NEXT_RC_VERSION}"
+            NEW_RC_VERSION=$(printf "%02d" $((10#$RC_VERSION + 1)))
+            NEW_VERSION="${MAJOR_MINOR}-RC${NEW_RC_VERSION}"
           fi
-          
           echo $NEW_VERSION > version.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
         
       - name: Login to Github Packages
@@ -62,3 +60,10 @@ jobs:
           release_name: Release ${{ steps.get-version.outputs.version }}
           draft: false
           prerelease: false
+      - name: Commit Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          
+          git commit -a -m "Updated version number [skip ci]"
+          git push
