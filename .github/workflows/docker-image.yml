@@ -22,21 +22,32 @@ jobs:
 
       - name: Update Version
         run: |
-          VERSION=$(cat version_1.txt)
-          MAJOR_MINOR=$(echo $VERSION | awk -F'-' '{print $1}')
-          RC_VERSION=$(echo $VERSION | awk -F'-' '{print $2}')
+          VERSION=$(cat version.txt)
           
-          if [ -z "$RC_VERSION" ]; then
-            NEW_VERSION="${MAJOR_MINOR}-RC01"
-          else
-            RC_NUMBER=$(echo $RC_VERSION | awk -F'RC' '{print $2}')
-            NEXT_RC_NUMBER=$(printf "%02d" $((10#$RC_NUMBER + 1)))
-            NEW_VERSION="${MAJOR_MINOR}-RC${NEXT_RC_NUMBER}"
-          fi
+          NEW_VERSION=$(echo $VERSION | awk -F-RC '{printf("%s-RC%d", $1,$2+1)}')
           
-          echo $NEW_VERSION > version1.txt
+          echo $NEW_VERSION > version.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+      # - name: Update Version
+      #   run: |
+      #     VERSION=$(cat version.txt)
+      #     MAJOR_MINOR=$(echo $VERSION | awk -F'-' '{print $1}')
+      #     RC_VERSION=$(echo $VERSION | awk -F'-' '{print $2}')
+          
+      #     if [ -z "$RC_VERSION" ]; then
+      #       NEW_VERSION="${MAJOR_MINOR}-RC01"
+      #     else
+      #       RC_NUMBER=$(echo $RC_VERSION | awk -F'RC' '{print $2}')
+      #       NEXT_RC_NUMBER=$(printf "%02d" $((10#$RC_NUMBER + 1)))
+      #       NEW_VERSION="${MAJOR_MINOR}-RC${NEXT_RC_NUMBER}"
+      #     fi
+          
+      #     echo $NEW_VERSION > version.txt
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
         
