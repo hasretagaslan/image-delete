@@ -68,4 +68,4 @@ jobs:
         with: 
           package-name: 'test'
           min-versions-to-keep: 3
-          ignore-versions: '^(0|[1-9]\\d*)\\.0\\.0$'
+          ignore-versions: '^(0|[1-9]\\d*)\\.0\\.0(-RC[0-9]+)?$'
