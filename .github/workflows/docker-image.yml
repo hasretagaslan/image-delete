@@ -20,15 +20,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      
       - name: Update Version
         run: |
-          VERSION=$(cat version_2.txt)
+          VERSION=$(cat version.txt)
           
-          NEW_VERSION=$(echo $VERSION | awk -F-RC '{printf("%s-RC%d", $1,$2+1)}')
+          NEW_VERSION=$(echo $VERSION | awk -F. '{printf("%d.%d.%d", $1,$2,$3+1)}')
           
-          echo $NEW_VERSION > version_2.txt
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo $NEW_VERSION > version.txt
 
 
       # - name: Update Version
