@@ -20,41 +20,41 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: Update Version
-        run: |
-          # Version dosyasını oku
-          VERSION=$(cat version.txt)
-          
-          # Sürüm numarasını al
-          # Eğer "v" ile başlamıyorsa, bunu ekle
-          if [[ ! $VERSION =~ ^v ]]; then
-            VERSION="v$VERSION"
-          fi
-          
-          # "v" karakterini kaldır
-          VERSION=${VERSION#v}
-          
-          # Sürüm numarasını parçalara ayır
-          IFS='.' read -r -a VERSION_PARTS <<< "$VERSION"
-          
-          # Parçalara ayırdığımız sürüm numarasını artır
-          MAJOR="${VERSION_PARTS[0]}"
-          MINOR="${VERSION_PARTS[1]}"
-          PATCH="${VERSION_PARTS[2]}"
-          
-          # Yeni sürüm numarasını oluştur
-          NEW_VERSION="v$((MAJOR + 1)).0.0"
-          
-          # Yeni sürüm numarasını dosyaya yaz
-          echo "$NEW_VERSION" > version.txt
-      
       # - name: Update Version
       #   run: |
+      #     # Version dosyasını oku
       #     VERSION=$(cat version.txt)
           
-      #     NEW_VERSION=$(echo $VERSION | awk -F. '{printf("%d.%d.%d", $1,$2,$3+1)}')
+      #     # Sürüm numarasını al
+      #     # Eğer "v" ile başlamıyorsa, bunu ekle
+      #     if [[ ! $VERSION =~ ^v ]]; then
+      #       VERSION="v$VERSION"
+      #     fi
           
-      #     echo $NEW_VERSION > version.txt
+      #     # "v" karakterini kaldır
+      #     VERSION=${VERSION#v}
+          
+      #     # Sürüm numarasını parçalara ayır
+      #     IFS='.' read -r -a VERSION_PARTS <<< "$VERSION"
+          
+      #     # Parçalara ayırdığımız sürüm numarasını artır
+      #     MAJOR="${VERSION_PARTS[0]}"
+      #     MINOR="${VERSION_PARTS[1]}"
+      #     PATCH="${VERSION_PARTS[2]}"
+          
+      #     # Yeni sürüm numarasını oluştur
+      #     NEW_VERSION="v$((MAJOR + 1)).0.0"
+          
+      #     # Yeni sürüm numarasını dosyaya yaz
+      #     echo "$NEW_VERSION" > version.txt
+      
+      - name: Update Version
+        run: |
+          VERSION=$(cat version.txt)
+          
+          NEW_VERSION=$(echo $VERSION | awk -F. '{printf("%d.%d.%d", $1,$2,$3+1)}')
+          
+          echo $NEW_VERSION > version.txt
 
 
       # - name: Update Version
@@ -101,9 +101,9 @@ jobs:
       #     draft: false
       #     prerelease: false
 
-      - uses: actions/delete-package-versions@v4
-        with:
-          package-name: 'image-delete/test'
-          package-type: 'container'
-          ignore-versions:  '^v6.0.0$'
-          min-versions-to-keep: 3
+      # - uses: actions/delete-package-versions@v4
+      #   with:
+      #     package-name: 'image-delete/test'
+      #     package-type: 'container'
+      #     ignore-versions:  '^v6.0.0$'
+         
