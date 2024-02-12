@@ -20,16 +20,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      # - name: Update Version
-      #   run: |
-      #     # Version dosyasını oku
-      #     VERSION=$(cat version.txt)
+      - name: Update Version
+        run: |
+          # Version dosyasını oku
+          VERSION=$(cat version.txt)
           
-      #     # Sürüm numarasını al
-      #     # Eğer "v" ile başlamıyorsa, bunu ekle
-      #     if [[ ! $VERSION =~ ^v ]]; then
-      #       VERSION="v$VERSION"
-      #     fi
+          # Sürüm numarasını al
+          # Eğer "v" ile başlamıyorsa, bunu ekle
+          if [[ ! $VERSION =~ ^v ]]; then
+            VERSION="v$VERSION"
+          fi
           
       #     # "v" karakterini kaldır
       #     VERSION=${VERSION#v}
@@ -57,23 +57,23 @@ jobs:
       #     echo $NEW_VERSION > version.txt
 
 
-      - name: Update Version
-        run: |
-          VERSION=$(cat version.txt)
-          MAJOR_MINOR=$(echo $VERSION | awk -F'-' '{print $1}')
-          RC_VERSION=$(echo $VERSION | awk -F'-' '{print $2}')
+      # - name: Update Version
+      #   run: |
+      #     VERSION=$(cat version.txt)
+      #     MAJOR_MINOR=$(echo $VERSION | awk -F'-' '{print $1}')
+      #     RC_VERSION=$(echo $VERSION | awk -F'-' '{print $2}')
           
-          if [ -z "$RC_VERSION" ]; then
-            NEW_VERSION="${MAJOR_MINOR}-RC01"
-          else
-            RC_NUMBER=$(echo $RC_VERSION | awk -F'RC' '{print $2}')
-            NEXT_RC_NUMBER=$(printf "%02d" $((10#$RC_NUMBER + 1)))
-            NEW_VERSION="${MAJOR_MINOR}-RC${NEXT_RC_NUMBER}"
-          fi
+      #     if [ -z "$RC_VERSION" ]; then
+      #       NEW_VERSION="${MAJOR_MINOR}-RC01"
+      #     else
+      #       RC_NUMBER=$(echo $RC_VERSION | awk -F'RC' '{print $2}')
+      #       NEXT_RC_NUMBER=$(printf "%02d" $((10#$RC_NUMBER + 1)))
+      #       NEW_VERSION="${MAJOR_MINOR}-RC${NEXT_RC_NUMBER}"
+      #     fi
           
-          echo $NEW_VERSION > version.txt
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     echo $NEW_VERSION > version.txt
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
         
@@ -101,9 +101,10 @@ jobs:
       #     draft: false
       #     prerelease: false
 
-      - uses: actions/delete-package-versions@v5.0.0
-        with:
-          package-name: 'image-delete/test'
-          package-type: 'container'
-          ignore-versions:  '^(0|[1-9]\\d*)\\.0\\.0$'
-          min-versions-to-keep: 1
+      # - uses: actions/delete-package-versions@v5.0.0
+      #   with:
+      #     package-name: 'image-delete/test'
+      #     package-type: 'container'
+      #     ignore-versions:  '^(0|[1-9]\\d*)\\.0\\.0$'
+      #     delete-only-pre-release-versions: 'true'
+      #     min-versions-to-keep: 1
