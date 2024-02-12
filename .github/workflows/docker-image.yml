@@ -105,5 +105,5 @@ jobs:
         with:
           package-name: 'image-delete/test'
           package-type: 'container'
-          ignore-versions:  '^(0|[1-9]\\d*)\\.0\\.1$'
+          ignore-versions:  '^(0|[1-9]\\d*)\\.0\\.0$'
           min-versions-to-keep: 1
