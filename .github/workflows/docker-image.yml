@@ -74,11 +74,11 @@ jobs:
       #     draft: false
       #     prerelease: false
 
-      # - uses: actions/delete-package-versions@v4
-      #   with:
-      #     package-name: 'image-delete/test'
-      #     package-type: 'container'
-      #     ignore-versions: ^(0\\.0\\.(?!x$)\\d+)$
-      #     min-versions-to-keep: 1
+      - uses: actions/delete-package-versions@v4
+        with:
+          package-name: 'image-delete/test'
+          package-type: 'container'
+          ignore-versions: ^(0\\.0\\.(?!x$)\\d+)$
+          min-versions-to-keep: 3
 
 
