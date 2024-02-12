@@ -19,15 +19,30 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
       
       - name: Update Version
         run: |
-          VERSION=$(cat version.txt)
+         
+          VERSION=$(cat version.txt)         
+          IFS='.' read -r -a VERSION_PARTS <<< "$VERSION"
+                   
+          MAJOR="${VERSION_PARTS[0]}"
+          MINOR="${VERSION_PARTS[1]}"
+          PATCH="${VERSION_PARTS[2]}"
+                    
+          NEW_VERSION="$((MAJOR + 1)).0.0"
+                    
+          echo "$NEW_VERSION" > version.txt
           
-          NEW_VERSION=$(echo $VERSION | awk -F. '{printf("%d.%d.%d", $1,$2,$3+1)}')
           
-          echo $NEW_VERSION > version.txt
+      
+      # - name: Update Version
+      #   run: |
+      #     VERSION=$(cat version.txt)
+          
+      #     NEW_VERSION=$(echo $VERSION | awk -F. '{printf("%d.%d.%d", $1,$2,$3+1)}')
+          
+      #     echo $NEW_VERSION > version.txt
 
 
       # - name: Update Version
