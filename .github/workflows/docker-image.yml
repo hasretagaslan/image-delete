@@ -22,19 +22,31 @@ jobs:
       
       - name: Update Version
         run: |
-         
-          VERSION=$(cat version.txt)         
+          # Version dosyasını oku
+          VERSION=$(cat version.txt)
+          
+          # Sürüm numarasını al
+          # Eğer "v" ile başlamıyorsa, bunu ekle
+          if [[ ! $VERSION =~ ^v ]]; then
+            VERSION="v$VERSION"
+          fi
+          
+          # "v" karakterini kaldır
+          VERSION=${VERSION#v}
+          
+          # Sürüm numarasını parçalara ayır
           IFS='.' read -r -a VERSION_PARTS <<< "$VERSION"
-                   
+          
+          # Parçalara ayırdığımız sürüm numarasını artır
           MAJOR="${VERSION_PARTS[0]}"
           MINOR="${VERSION_PARTS[1]}"
           PATCH="${VERSION_PARTS[2]}"
-                    
-          NEW_VERSION="$((MAJOR + 1)).0.0"
-                    
+          
+          # Yeni sürüm numarasını oluştur
+          NEW_VERSION="v$((MAJOR + 1)).0.0"
+          
+          # Yeni sürüm numarasını dosyaya yaz
           echo "$NEW_VERSION" > version.txt
-          
-          
       
       # - name: Update Version
       #   run: |
@@ -89,9 +101,9 @@ jobs:
       #     draft: false
       #     prerelease: false
 
-      - uses: actions/delete-package-versions@v4
-        with:
-          package-name: 'image-delete/test'
-          package-type: 'container'
-          ignore-versions:  '^0.0.2$'
-          min-versions-to-keep: 3
+      # - uses: actions/delete-package-versions@v4
+      #   with:
+      #     package-name: 'image-delete/test'
+      #     package-type: 'container'
+      #     ignore-versions:  '^0.0.2$'
+      #     min-versions-to-keep: 3
