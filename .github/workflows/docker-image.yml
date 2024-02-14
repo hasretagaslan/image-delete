@@ -101,7 +101,7 @@ jobs:
       #     draft: false
       #     prerelease: false
 
-      - uses: emredenz/delete-package-versions
+      - uses: emredenz/delete-package-versions@main
         with:
           package-name: 'image-delete/test'
           package-type: 'container'
