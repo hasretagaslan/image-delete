@@ -101,9 +101,9 @@ jobs:
       #     draft: false
       #     prerelease: false
 
-      # - uses: hasretagaslan/delete-package-versions@main
-      #   with:
-      #     package-name: 'image-delete/test'
-      #     package-type: 'container'
-      #     ignore-versions:  '^\\d.\\d.\\d$'
-      #     min-versions-to-keep: 1
+      - uses: hasretagaslan/delete-package-versions@main
+        with:
+          package-name: 'image-delete/test'
+          package-type: 'container'
+          ignore-versions:  '^\\d.\\d.\\d$'
+          min-versions-to-keep: 1
