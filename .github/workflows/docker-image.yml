@@ -20,33 +20,33 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      # - name: Update Version
-      #   run: |
-      #     # Version dosyasını oku
-      #     VERSION=$(cat version.txt)
+      - name: Update Version
+        run: |
+          # Version dosyasını oku
+          VERSION=$(cat version.txt)
           
-      #     # Sürüm numarasını al
-      #     # Eğer "v" ile başlamıyorsa, bunu ekle
-      #     if [[ ! $VERSION =~ ^v ]]; then
-      #       VERSION="v$VERSION"
-      #     fi
+          # Sürüm numarasını al
+          # Eğer "v" ile başlamıyorsa, bunu ekle
+          if [[ ! $VERSION =~ ^v ]]; then
+            VERSION="v$VERSION"
+          fi
           
-      #     # "v" karakterini kaldır
-      #     VERSION=${VERSION#v}
+          # "v" karakterini kaldır
+          VERSION=${VERSION#v}
           
-      #     # Sürüm numarasını parçalara ayır
-      #     IFS='.' read -r -a VERSION_PARTS <<< "$VERSION"
+          # Sürüm numarasını parçalara ayır
+          IFS='.' read -r -a VERSION_PARTS <<< "$VERSION"
           
-      #     # Parçalara ayırdığımız sürüm numarasını artır
-      #     MAJOR="${VERSION_PARTS[0]}"
-      #     MINOR="${VERSION_PARTS[1]}"
-      #     PATCH="${VERSION_PARTS[2]}"
+          # Parçalara ayırdığımız sürüm numarasını artır
+          MAJOR="${VERSION_PARTS[0]}"
+          MINOR="${VERSION_PARTS[1]}"
+          PATCH="${VERSION_PARTS[2]}"
           
-      #     # Yeni sürüm numarasını oluştur
-      #     NEW_VERSION="v$((MAJOR + 1)).0.0"
+          # Yeni sürüm numarasını oluştur
+          NEW_VERSION="v$((MAJOR + 1)).0.0"
           
-      #     # Yeni sürüm numarasını dosyaya yaz
-      #     echo "$NEW_VERSION" > version.txt
+          # Yeni sürüm numarasını dosyaya yaz
+          echo "$NEW_VERSION" > version.txt
       
       # - name: Update Version
       #   run: |
@@ -57,23 +57,23 @@ jobs:
       #     echo $NEW_VERSION > version.txt
 
 
-      - name: Update Version
-        run: |
-          VERSION=$(cat version.txt)
-          MAJOR_MINOR=$(echo $VERSION | awk -F'-' '{print $1}')
-          RC_VERSION=$(echo $VERSION | awk -F'-' '{print $2}')
+      # - name: Update Version
+      #   run: |
+      #     VERSION=$(cat version.txt)
+      #     MAJOR_MINOR=$(echo $VERSION | awk -F'-' '{print $1}')
+      #     RC_VERSION=$(echo $VERSION | awk -F'-' '{print $2}')
           
-          if [ -z "$RC_VERSION" ]; then
-            NEW_VERSION="${MAJOR_MINOR}-RC01"
-          else
-            RC_NUMBER=$(echo $RC_VERSION | awk -F'RC' '{print $2}')
-            NEXT_RC_NUMBER=$(printf "%02d" $((10#$RC_NUMBER + 1)))
-            NEW_VERSION="${MAJOR_MINOR}-RC${NEXT_RC_NUMBER}"
-          fi
+      #     if [ -z "$RC_VERSION" ]; then
+      #       NEW_VERSION="${MAJOR_MINOR}-RC01"
+      #     else
+      #       RC_NUMBER=$(echo $RC_VERSION | awk -F'RC' '{print $2}')
+      #       NEXT_RC_NUMBER=$(printf "%02d" $((10#$RC_NUMBER + 1)))
+      #       NEW_VERSION="${MAJOR_MINOR}-RC${NEXT_RC_NUMBER}"
+      #     fi
           
-          echo $NEW_VERSION > version.txt
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     echo $NEW_VERSION > version.txt
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
         
