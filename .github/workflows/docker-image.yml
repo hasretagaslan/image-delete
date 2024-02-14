@@ -20,16 +20,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: Update Version
-        run: |
-          # Version dosyasını oku
-          VERSION=$(cat version.txt)
+      # - name: Update Version
+      #   run: |
+      #     # Version dosyasını oku
+      #     VERSION=$(cat version.txt)
           
-          # Sürüm numarasını al
-          # Eğer "v" ile başlamıyorsa, bunu ekle
-          if [[ ! $VERSION =~ ^v ]]; then
-            VERSION="v$VERSION"
-          fi
+      #     # Sürüm numarasını al
+      #     # Eğer "v" ile başlamıyorsa, bunu ekle
+      #     if [[ ! $VERSION =~ ^v ]]; then
+      #       VERSION="v$VERSION"
+      #     fi
           
       #     # "v" karakterini kaldır
       #     VERSION=${VERSION#v}
@@ -48,13 +48,13 @@ jobs:
       #     # Yeni sürüm numarasını dosyaya yaz
       #     echo "$NEW_VERSION" > version.txt
       
-      # - name: Update Version
-      #   run: |
-      #     VERSION=$(cat version.txt)
+      - name: Update Version
+        run: |
+          VERSION=$(cat version.txt)
           
-      #     NEW_VERSION=$(echo $VERSION | awk -F. '{printf("%d.%d.%d", $1,$2,$3+1)}')
+          NEW_VERSION=$(echo $VERSION | awk -F. '{printf("%d.%d.%d", $1,$2,$3+1)}')
           
-      #     echo $NEW_VERSION > version.txt
+          echo $NEW_VERSION > version.txt
 
 
       # - name: Update Version
@@ -101,9 +101,9 @@ jobs:
       #     draft: false
       #     prerelease: false
 
-      - uses: actions/delete-package-versions@v5.0.0
-        with:
-          package-name: 'image-delete/test'
-          package-type: 'container'
-          ignore-versions:  '^(0|[1-9]\d*)\.0\.0$'
-          min-versions-to-keep: 1
+      # - uses: deepin-market/delete-package-versions@main
+      #   with:
+      #     package-name: 'image-delete/test'
+      #     package-type: 'container'
+      #     ignore-versions:  '^(0|[1-9]\d*)\.0\.0$'
+      #     min-versions-to-keep: 1
