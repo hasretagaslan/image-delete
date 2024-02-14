@@ -101,7 +101,7 @@ jobs:
       #     draft: false
       #     prerelease: false
 
-      - uses: emredenz/emredenz/delete-deneme-image@master
+      - uses: emredenz/delete-package-versions
         with:
           package-name: 'image-delete/test'
           package-type: 'container'
