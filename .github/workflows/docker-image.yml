@@ -115,7 +115,7 @@ jobs:
       #     draft: false
       #     prerelease: false
 
-      - uses: deepin-market/delete-package-versions@master
+      - uses: hasretagaslan/delete-package-versions@main
         with:
           package-name: 'image-delete/test'
           package-type: 'container'
