@@ -106,7 +106,7 @@ jobs:
       #     draft: false
       #     prerelease: false
 
-      - uses: hasretagaslan/delete-package-versions@main
+      - uses: hasretagaslan/hasretttt-testtttt@main
         with:
           package-name: 'image-delete/test'
           package-type: 'container'
