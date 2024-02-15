@@ -50,14 +50,24 @@ jobs:
 
 
       
-      - name: Update Version
-        run: |
-          VERSION=$(cat version.txt)
+      # - name: Update Version
+      #   run: |
+      #     VERSION=$(cat version.txt)
           
-          NEW_VERSION=$(echo $VERSION | awk -F. '{printf("%d.%d.%d", $1,$2,$3+1)}')
+      #     NEW_VERSION=$(echo $VERSION | awk -F. '{printf("%d.%d.%d", $1,$2,$3+1)}')
           
-          echo $NEW_VERSION > version.txt
+      #     echo $NEW_VERSION > version.txt
 
+
+
+     - name: Update Version
+      run: |
+        VERSION=$(cat version.txt)
+        
+        # İlk adımı artır
+        NEW_VERSION=$(echo $VERSION | awk -F. '{printf("%d.%d.%d", $1+1,$2,$3)}')
+        
+        echo $NEW_VERSION > version.txt
 
 
 
@@ -106,9 +116,9 @@ jobs:
       #     draft: false
       #     prerelease: false
 
-      - uses: hasretagaslan/hasretttt-testtttt@main
-        with:
-          package-name: 'image-delete/test'
-          package-type: 'container'
-          ignore-versions: '^0\.0\(0|[1-9]\d*)$'
-          min-versions-to-keep: 1 
+      # - uses: emredenz/delete-package-versions@deepin
+      #   with:
+      #     package-name: 'image-delete/test'
+      #     package-type: 'container'
+      #     ignore-versions: '^(0|[1-9]\d*)\.0\.0$'
+      #     min-versions-to-keep: 1 
