@@ -20,6 +20,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
+      - name: Update Version
+        run: |
+          VERSION=$(cat version.txt)
+          
+          # İlk adımı artır
+          NEW_VERSION=$(echo $VERSION | awk -F. '{printf("%d.%d.%d", $1+1,$2,$3)}')
+          
+          echo $NEW_VERSION > version.txt
+
       # - name: Update Version
       #   run: |
       #     # Version dosyasını oku
@@ -60,17 +69,7 @@ jobs:
 
 
 
-     - name: Update Version
-      run: |
-        VERSION=$(cat version.txt)
-        
-        # İlk adımı artır
-        NEW_VERSION=$(echo $VERSION | awk -F. '{printf("%d.%d.%d", $1+1,$2,$3)}')
-        
-        echo $NEW_VERSION > version.txt
-
-
-
+     
 
       # - name: Update Version
       #   run: |
